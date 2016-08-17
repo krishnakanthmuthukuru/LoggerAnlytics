@@ -14,7 +14,7 @@ import axios from 'axios';
 
       handleChange(event,index,value){
 
-        console.log(value);
+        console.log("File Name:"+value);
       }
 
       componentWillMount(){
