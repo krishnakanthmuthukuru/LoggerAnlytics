@@ -20,14 +20,12 @@ import axios from 'axios';
       componentWillMount(){
       axios.get("http://localhost:7770/files").
       then((files)=>{
-        console.log("received ...................." ,files.data);
-        var arr = files.data;
-        var fData = arr.map(function(d){
+        var fData = files.data.map(function(d){
           return(
           d.substring(46)
         );
         });
-        console.log(fData);
+        //console.log(fData);
         this.setState({
           files: fData
         })

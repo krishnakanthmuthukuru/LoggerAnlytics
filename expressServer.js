@@ -1,9 +1,7 @@
 var express = require('express');
 var logger = require('morgan');
-const fs = require('fs');
 var customMiddleware = require('./customMiddleware.js');
 var dir = require('node-dir');
-// console.log(customMiddleware);
 var app = express();
 var port = 7770;
 
@@ -23,7 +21,8 @@ app.get('/', function (req, res) {
     res.end('Hello Express!');
 });
 app.get('/files',function(req,res){
-  dir.readFiles("/home/osgdev/workspace/LoggerAnalytics-master", {
+
+  dir.readFiles(__dirname, {
       match: /.log$/,
        exclude: ['Changelog']
       }, function(err, content, next) {
@@ -39,7 +38,6 @@ app.get('/files',function(req,res){
       });
 })
 app.get('/logs',function(req,res){
-  // arr = [];
   var lineReader = require('readline').createInterface({
     input: require('fs').createReadStream('./access.log')
   });
