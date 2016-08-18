@@ -8,8 +8,8 @@ import axios from 'axios';
 
       constructor(props) {
         super(props);
-        this.state = {value : "Log files",
-        files: ["never","something"]};
+        this.state = {value : "access.log",
+        files: []};
       }
 
       handleChange(event,index,value){
@@ -21,13 +21,17 @@ import axios from 'axios';
       axios.get("http://localhost:7770/files").
       then((files)=>{
         console.log("received ...................." ,files.data);
+        var arr = files.data;
+        var fData = arr.map(function(d){
+          return(
+          d.substring(46)
+        );
+        });
+        console.log(fData);
         this.setState({
-          files: files.data
+          files: fData
         })
       })
-      }
-    componentDidMount(){
-
     }
       render() {
         var file = this.state.files;
@@ -37,7 +41,7 @@ import axios from 'axios';
             );
           });
         return (
-          <DropDownMenu value={this.state.value} onChange={this.handleChange}>
+          <DropDownMenu value={this.state.value} onChange={this.handleChange} >
           {logData}
           </DropDownMenu>
         );
